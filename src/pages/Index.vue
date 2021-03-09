@@ -174,7 +174,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:8000/api/setting")
+      .get("https://kedbel.com/dev.kedbel.com/api/setting")
       .then(response => (this.infoadmin = response));
   }
 };
