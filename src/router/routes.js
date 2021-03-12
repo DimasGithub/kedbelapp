@@ -4,6 +4,8 @@ import Produk from 'pages/Produk.vue'
 import Detailproduk from 'pages/detailproduk.vue'
 import Tentang from 'pages/Tentang.vue'
 import Panduan from 'pages/Panduan.vue'
+import Login  from 'pages/login.vue'
+import Indexadmin from 'pages/Indexadmin.vue'
 const routes = [
   {
     path: '/',
@@ -28,6 +30,14 @@ const routes = [
      {
        path : "/panduan",
        component : Panduan
+     },
+     {
+       path : "/login",
+       component : Login
+     },
+     {
+       path : "/indexadmin",
+       component : Indexadmin
      }
     ]
   },
