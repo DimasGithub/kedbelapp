@@ -6,6 +6,9 @@ import Tentang from 'pages/Tentang.vue'
 import Panduan from 'pages/Panduan.vue'
 import Login  from 'pages/login.vue'
 import Indexadmin from 'pages/Indexadmin.vue'
+import AdminDetailProduk from 'pages/Admindetailproduk.vue'
+import Addproduct from 'pages/AddProduct.vue'
+import Contoh from 'pages/contoh.vue'
 const routes = [
   {
     path: '/',
@@ -38,6 +41,19 @@ const routes = [
      {
        path : "/indexadmin",
        component : Indexadmin
+     },
+     {
+       path: "/indexadmin/produk/:id",
+       component: AdminDetailProduk,
+
+     },
+     {
+       path:"/indexadmin/tambah/",
+       component : Addproduct,
+     },
+     {
+      path: "/contoh",
+      component: Contoh,
      }
     ]
   },

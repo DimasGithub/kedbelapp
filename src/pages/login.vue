@@ -37,7 +37,7 @@
               style="width:90%;"
             />
             <q-btn
-              @click="$router.push('/indexadmin')"
+              @click="Cek"
               unelevated
               rounded
               color="primary"
@@ -58,6 +58,18 @@ export default {
       username: "",
       password: ""
     };
+  },
+  methods: {
+    Cek() {
+      if (this.username != "kedbel" && this.password != "kedbel") {
+        this.$q.notify({
+          type: "negative",
+          message: `Username dan password anda tidak cocok !!!`
+        });
+      } else {
+        this.$router.push("/indexadmin");
+      }
+    }
   }
 };
 </script>

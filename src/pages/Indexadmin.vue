@@ -9,7 +9,7 @@
         <q-btn flat round dense icon="more_vert" @click="$router.push('/')" />
       </q-toolbar>
 
-      <div class="q-pa-md">
+      <div>
         <q-btn
           dense
           color="primary"
@@ -21,8 +21,20 @@
           title="Data produk"
           :data="dataproduk"
           :columns="columns"
-          row-key="dataproduk.id"
-        />
+          row-key="name"
+        >
+          <template v-slot:body-cell-action="id">
+            <q-td :props="id">
+              <q-btn
+                color="primary"
+                icon-right="edit"
+                no-caps
+                flat
+                dense
+              />
+            </q-td>
+          </template>
+        </q-table>
       </div>
     </q-page>
   </q-page-container>
@@ -30,6 +42,7 @@
 <script>
 import axios from "axios";
 export default {
+  props: ["id"],
   data() {
     return {
       columns: [
@@ -47,21 +60,22 @@ export default {
           field: "harga",
           sortable: true
         },
-        {
-          name: "Aksi",
-          align: "left",
-          label: "Aksi",
-          field: "<a href='kedbel.com'>link text</a>",
-          sortable: true
-        }
+        { name: "action", label: "Aksi", field: "action" }
       ],
       dataproduk: []
     };
   },
   mounted() {
     axios
-      .get("https://kedbel.com/dev.kedbel.com/api/produk")
+      .get("http://127.0.0.1:8000/api/produk")
       .then(response => (this.dataproduk = response.data));
-  }
+  },
+  methods: {
+     pindah(index){
+      console.log(index)
+      $router.push('/indexadmin/produk/'+id);
+      console.log(this.$router)
+  },
+}
 };
 </script>
