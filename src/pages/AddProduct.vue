@@ -20,10 +20,11 @@
           </q-toolbar-title>
         </q-toolbar>
         <div class="row" style="width:100%;">
-          <form @submit.prevent="addProduct" class="q-gutter-md">
+          <form>
             <div class="row justify-center">
               <p style=" width:90%; margin-top:10px;">Nama barang :</p>
               <q-input
+                name="namaproduk"
                 dense
                 outlined
                 v-model="dataproduk.namaproduk"
@@ -36,6 +37,7 @@
               />
               <p style=" width:90%; ">Harga barang :</p>
               <q-input
+                name="harga"
                 dense
                 outlined
                 v-model="dataproduk.harga"
@@ -49,6 +51,7 @@
               />
               <p style=" width:90%;">Deskripsi :</p>
               <q-editor
+                name="deskripsi"
                 style="width:90%; margin-right:10px; margin-left:10px; margin-bottom: 20px; justify-content: center;"
                 v-model="dataproduk.deskripsi"
                 :definitions="{
@@ -57,6 +60,8 @@
               />
               <p style=" width:90%;">Upload Gambar :</p>
               <q-file
+                name="gambar"
+                @change="handleFileObject()"
                 dense
                 outlined
                 v-model="dataproduk.gambar"
@@ -64,6 +69,7 @@
                 style="width:90%; margin-right:10px; margin-left:10px; margin-bottom: 20px; justify-content: center;"
               />
               <q-btn
+                @click.prevent="addProduct"
                 type="submit"
                 dense
                 color="primary"
@@ -71,6 +77,7 @@
                 style="width:90%; margin: 20px; justify-content: center;"
               />
               <q-btn
+                @click="onReset"
                 type="reset"
                 dense
                 outlined
@@ -87,29 +94,59 @@
 </template>
 <script>
 import axios from "axios";
+import _ from "lodash";
 export default {
   data() {
     return {
-      dataproduk: {}
+      dataproduk: {
+        namaproduk: null,
+        harga: null,
+        deskripsi: null
+      },
+      gambar: null
     };
   },
   methods: {
     addProduct() {
-      this.axios
-        .post("http://127.0.0.1:8000/api/produk/create", this.dataproduk)
-        .catch(err => console.log(err))
-        .then(response => this.$router.push("/indexadmin"))
-        .catch()
-        .finally(() => (this.loading = false));
+      let dataproduk = new FormData();
+      dataproduk.append("gambar", this.gambar);
+      _.each(this.dataproduk, (value, key) => {
+        dataproduk.append(key, value);
+      });
+      axios
+        .post("http://127.0.0.1:8000/api/produk/create/", dataproduk, {
+          headers: {
+            "Content-Type":
+              "multipart/form-data; charset=utf-8; boundary=" +
+              Math.random()
+                .toString()
+                .substr(2)
+          }
+        })
+        .then(this.$router.push("/indexadmin"))
+        .catch(err => {
+          if (err.response.status === 422) {
+            this.errors = [];
+            _.each(err.response.data.errors, error => {
+              _.each(error, e => {
+                this.errors.push(e);
+              });
+            });
+          }
+        });
     },
     onReset() {
       {
-        (dataproduk.namaproduk = null),
-          (dataproduk.harga = null),
-          (dataproduk.content = null),
-          (dataproduk.deskripsi = null),
-          (dataproduk.gambar = null);
+        (this.dataproduk.namaproduk = null),
+          (this.dataproduk.harga = null),
+          (this.dataproduk.content = null),
+          (this.dataproduk.deskripsi = null),
+          (this.dataproduk.gambar = null);
       }
+    },
+    handleFileObject() {
+      this.gambar = this.$refs.file.files[0];
+      this.gambarName = this.gambar.name;
     }
   }
 };
