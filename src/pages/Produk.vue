@@ -18,13 +18,21 @@
           <q-toolbar-title>
             Produk
           </q-toolbar-title>
-          <q-btn
-            flat
-            round
-            dense
-            icon="more_vert"
-            @click="$router.push('/panduan')"
-          />
+          <q-btn-dropdown color="primary" flat round dense>
+            <q-list>
+              <q-item clickable v-close-popup @click="$router.push('/panduan')">
+                <q-item-section>
+                  <q-item-label>Panduan</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup @click="$router.push('/login')">
+                <q-item-section>
+                  <q-item-label>Login</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
         </q-toolbar>
         <div class="row" style="margin-top:10px; margin-button:10px;">
           <div class="col-6" v-for="info in info.data" v-bind:key="info.id">

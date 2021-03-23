@@ -12,6 +12,7 @@
       <div>
         <q-btn
           dense
+          @click="$router.push('/indexadmin/tambah')"
           color="primary"
           label="Tambah produk"
           style="margin: 10px;"
@@ -25,13 +26,7 @@
         >
           <template v-slot:body-cell-action="id">
             <q-td :props="id">
-              <q-btn
-                color="primary"
-                icon-right="edit"
-                no-caps
-                flat
-                dense
-              />
+              <q-btn color="primary" icon-right="edit" no-caps flat dense />
             </q-td>
           </template>
         </q-table>
@@ -71,11 +66,11 @@ export default {
       .then(response => (this.dataproduk = response.data));
   },
   methods: {
-     pindah(index){
-      console.log(index)
-      $router.push('/indexadmin/produk/'+id);
-      console.log(this.$router)
-  },
-}
+    pindah(index) {
+      console.log(index);
+      $router.push("/indexadmin/produk/" + id);
+      console.log(this.$router);
+    }
+  }
 };
 </script>

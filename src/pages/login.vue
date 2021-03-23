@@ -22,6 +22,7 @@
         <div class="cotent content-center">
           <div class="row justify-center">
             <q-input
+              dense
               rounded
               outlined
               v-model="username"
@@ -29,6 +30,7 @@
               style="width:90%; margin:10px;"
             />
             <q-input
+              dense
               rounded
               outlined
               v-model="password"

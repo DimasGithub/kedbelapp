@@ -20,15 +20,16 @@
           </q-toolbar-title>
         </q-toolbar>
         <div class="row" style="width:100%;">
-          <form
+          <q-form
             method="post"
-            @submit="addProduct"
-            class="q-gutter-md"
             enctype="multipart/form-data"
+            class="q-gutter-md"
+            action="http://127.0.0.1:8000/api/biodata/add"
           >
             <div class="row justify-center">
               <p style=" width:90%; margin-top:10px;">Nama :</p>
               <q-input
+                name="name"
                 dense
                 outlined
                 v-model="dataproduk.name"
@@ -42,6 +43,7 @@
               <p style=" width:90%; ">Deskripsi :</p>
               <q-input
                 dense
+                name="description"
                 outlined
                 v-model="dataproduk.description"
                 type="text"
@@ -55,6 +57,7 @@
               <p style=" width:90%;">Konten :</p>
               <q-input
                 dense
+                name="content"
                 outlined
                 v-model="dataproduk.content"
                 type="text"
@@ -65,44 +68,26 @@
                   val => (val && val.length > 0) || 'Please type something'
                 ]"
               />
-              <!-- <q-editor
-              style="width:90%; margin-right:10px; margin-left:10px; margin-bottom: 20px; justify-content: center;"
-              v-model="dataproduk.content"
-              :definitions="{
-               bold: {label: 'Bold', icon: null, tip: 'My bold tooltip'}}"
-            /> -->
-              <!-- <p style=" width:90%;">Deskripsi :</p>
-             <q-editor
-              
-              style="width:90%; margin-right:10px; margin-left:10px; margin-bottom: 20px; justify-content: center;"
-              v-model="dataproduk.deskripsi"
-              :definitions="{
-               bold: {label: 'Bold', icon: null, tip: 'My bold tooltip'}}"
-            />
-       -->
+
               <p style=" width:90%;">Upload Gambar :</p>
               <input
                 type="file"
-                class="form-control"
-                v-on:change="onImageChange"
+                class="custom-file-input"
+                id="customFile"
+                ref="file"
+                @change="handleFileObject()"
               />
+
               <q-btn
                 type="submit"
+                @click.prevent="submit"
                 dense
                 color="primary"
                 label="Add"
                 style="width:90%; margin: 20px; justify-content: center;"
               />
-              <!-- <q-btn
-              type="reset"  
-              dense
-              outlined
-              color="primary"
-              label="Reset"
-              style="width:90%; margin: 20px; justify-content: center;"
-            /> -->
             </div>
-          </form>
+          </q-form>
         </div>
       </q-page>
     </transition>
@@ -110,28 +95,51 @@
 </template>
 <script>
 import axios from "axios";
+import _ from "lodash";
+import router from "src/router";
 export default {
   data() {
     return {
-      dataproduk: {}
+      dataproduk: {
+        name: null,
+        description: null,
+        content: null
+      },
+      picture: null
     };
   },
   methods: {
-    onImageChange(e) {
-      console.log(e.target.files[0]);
-      dataproduk.picture = e.target.files[0];
-    },
-    addProduct() {
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data"
-        }
-      };
+    submit() {
+      let dataproduk = new FormData();
+      dataproduk.append("picture", this.picture);
+      _.each(this.dataproduk, (value, key) => {
+        dataproduk.append(key, value);
+      });
       axios
-        .post("http://127.0.0.1:8000/api/biodata/add", this.dataproduk, config)
-        .then(response => this.$router.push("/indexadmin"))
-        .catch(err => console.log(err))
-        .finally(() => (this.loading = false));
+        .post("http://127.0.0.1:8000/api/biodata/add", dataproduk, {
+          headers: {
+            "Content-Type":
+              "multipart/form-data; charset=utf-8; boundary=" +
+              Math.random()
+                .toString()
+                .substr(2)
+          }
+        })
+        .then($router.push("/indexadmin"))
+        .catch(err => {
+          if (err.response.status === 422) {
+            this.errors = [];
+            _.each(err.response.data.errors, error => {
+              _.each(error, e => {
+                this.errors.push(e);
+              });
+            });
+          }
+        });
+    },
+    handleFileObject() {
+      this.picture = this.$refs.file.files[0];
+      this.pictureName = this.picture.name;
     }
   }
 };
