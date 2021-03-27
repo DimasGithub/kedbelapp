@@ -6,7 +6,6 @@
         <q-toolbar-title>
           Admin panel
         </q-toolbar-title>
-        <q-btn flat round dense icon="more_vert" @click="$router.push('/')" />
       </q-toolbar>
 
       <div>
@@ -18,6 +17,7 @@
           style="margin: 10px;"
           size="12px"
         />
+
         <q-table
           title="Data produk"
           :data="dataproduk"
@@ -26,7 +26,14 @@
         >
           <template v-slot:body-cell-action="id">
             <q-td :props="id">
-              <q-btn color="primary" icon-right="edit" no-caps flat dense />
+              <q-btn
+                color="primary"
+                icon-right="edit"
+                no-caps
+                flat
+                dense
+                @click="$router.push('/indexadmin/produk/' + dataproduk)"
+              />
             </q-td>
           </template>
         </q-table>
@@ -55,7 +62,7 @@ export default {
           field: "harga",
           sortable: true
         },
-        { name: "action", label: "Aksi", field: "action" }
+        { name: "action", label: "Aksi", field: "dataproduk.id" }
       ],
       dataproduk: []
     };

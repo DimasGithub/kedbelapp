@@ -44,8 +44,8 @@ const routes = [
      },
      {
        path: "/indexadmin/produk/:id",
+       props:true,
        component: AdminDetailProduk,
-
      },
      {
        path:"/indexadmin/tambah/",
@@ -57,7 +57,6 @@ const routes = [
      }
     ]
   },
-
   {
     path: '*',
     component: () => import('pages/Error404.vue')

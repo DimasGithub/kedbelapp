@@ -116,7 +116,7 @@ export default {
         dataproduk.append(key, value);
       });
       axios
-        .post("http://127.0.0.1:8000/api/produk/add", dataproduk, {
+        .post("http://127.0.0.1:8000/api/biodata/add", dataproduk, {
           headers: {
             "Content-Type":
               "multipart/form-data; charset=utf-8; boundary=" +

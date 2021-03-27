@@ -13,7 +13,7 @@
             round
             dense
             icon="arrow_back"
-            @click="$router.push('/')"
+            @click="$router.push('/indexadmin')"
           />
           <q-toolbar-title>
             Tambah produk
@@ -64,9 +64,9 @@
                 @change="handleFileObject()"
                 dense
                 outlined
-                v-model="dataproduk.gambar"
+                v-model="gambar"
                 label="Gambar produk"
-                style="width:90%; margin-right:10px; margin-left:10px; margin-bottom: 20px; justify-content: center;"
+                style="width:90%; margin-right:10px; margin-left:10px; margin-bottom: 20px; "
               />
               <q-btn
                 @click.prevent="addProduct"
@@ -141,7 +141,7 @@ export default {
           (this.dataproduk.harga = null),
           (this.dataproduk.content = null),
           (this.dataproduk.deskripsi = null),
-          (this.dataproduk.gambar = null);
+          (this.gambar = null);
       }
     },
     handleFileObject() {

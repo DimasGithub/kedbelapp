@@ -187,6 +187,5 @@ export default {
       .get("https://kedbel.com/dev.kedbel.com/api/setting")
       .then(response => (this.infoadmin = response));
   }
-  
 };
 </script>
