@@ -8,7 +8,9 @@ import Login  from 'pages/login.vue'
 import Indexadmin from 'pages/Indexadmin.vue'
 import AdminDetailProduk from 'pages/Admindetailproduk.vue'
 import Addproduct from 'pages/AddProduct.vue'
+import Editproduct from 'pages/Editpage.vue'
 import Contoh from 'pages/contoh.vue'
+import Editcontoh from 'pages/editcontoh.vue'
 const routes = [
   {
     path: '/',
@@ -52,8 +54,18 @@ const routes = [
        component : Addproduct,
      },
      {
+       path:"/indexadmin/edit/:id",
+       props:true,
+       component: Editproduct,
+     },
+     {
       path: "/contoh",
       component: Contoh,
+     },
+     {
+      path: "/editcontoh/:id",
+      props: true,
+      component: Editcontoh,
      }
     ]
   },
