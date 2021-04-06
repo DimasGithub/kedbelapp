@@ -69,7 +69,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:8000/api/produk")
+      .get("https://kedbel.com/dev.kedbel.com/api/produk")
       .then(response => (this.dataproduk = response.data));
   },
   methods: {

@@ -99,9 +99,9 @@ export default {
   data() {
     return {
       dataproduk: {
-        namaproduk: null,
-        harga: null,
-        deskripsi: null
+        namaproduk: "",
+        harga: 0,
+        deskripsi: ""
       },
       gambar: null
     };
@@ -114,15 +114,19 @@ export default {
         dataproduk.append(key, value);
       });
       axios
-        .post("http://127.0.0.1:8000/api/produk/create/", dataproduk, {
-          headers: {
-            "Content-Type":
-              "multipart/form-data; charset=utf-8; boundary=" +
-              Math.random()
-                .toString()
-                .substr(2)
+        .post(
+          "https://kedbel.com/dev.kedbel.com/api/produk/create/",
+          dataproduk,
+          {
+            headers: {
+              "Content-Type":
+                "multipart/form-data; charset=utf-8; boundary=" +
+                Math.random()
+                  .toString()
+                  .substr(2)
+            }
           }
-        })
+        )
         .then(this.$router.push("/indexadmin"))
         .catch(err => {
           if (err.response.status === 422) {
@@ -137,11 +141,11 @@ export default {
     },
     onReset() {
       {
-        (this.dataproduk.namaproduk = null),
-          (this.dataproduk.harga = null),
-          (this.dataproduk.content = null),
-          (this.dataproduk.deskripsi = null),
-          (this.gambar = null);
+        (this.dataproduk.namaproduk = ""),
+          (this.dataproduk.harga = ""),
+          (this.dataproduk.content = ""),
+          (this.dataproduk.deskripsi = ""),
+          (this.gambar = "");
       }
     },
     handleFileObject() {

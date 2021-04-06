@@ -59,7 +59,9 @@
             />
             <p style=" width:90%;">Gambar sekarang :</p>
             <img
-              :src="'http://127.0.0.1:8000/storage/' + dataproduk.gambar"
+              :src="
+                'https://kedbel.com/dev.kedbel.com/storage/' + dataproduk.gambar
+              "
               style="width:150px; height:150px;"
             />
             <p style=" width:90%;">Ubah Gambar :</p>
@@ -114,7 +116,7 @@ export default {
       });
       axios
         .put(
-          "http://127.0.0.1:8000/api/produk/update/" + this.id,
+          "https://kedbel.com/dev.kedbel.com/api/produk/update/" + this.id,
           this.dataproduk,
           {
             headers: {
@@ -142,10 +144,12 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://127.0.0.1:8000/api/produk/ " + this.id).then(response => {
-      this.dataproduk = response.data;
-      console.log(this.dataproduk);
-    });
+    axios
+      .get("https://kedbel.com/dev.kedbel.com/api/produk/ " + this.id)
+      .then(response => {
+        this.dataproduk = response.data;
+        console.log(this.dataproduk);
+      });
   }
 };
 </script>

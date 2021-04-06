@@ -21,7 +21,7 @@
         </q-toolbar>
 
         <q-card class="my-card" style="margin:10px;">
-          <img
+          <img v-if="info.gambar"
             :src="'https://kedbel.com/dev.kedbel.com/storage/' + info.gambar"
           />
 

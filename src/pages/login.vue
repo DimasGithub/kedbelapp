@@ -62,17 +62,9 @@ export default {
       password: ""
     };
   },
-  mounted() {
-    axios
-      .get("http://127.0.0.1:8000/api/userku")
-      .then(response => (this.datauser = response));
-  },
   methods: {
     Cek() {
-      if (
-        this.username === this.datauser.email &&
-        this.password === this.datauser.password
-      ) {
+      if (!(this.username === "kedbel" && this.password === "password")) {
         this.$q.notify({
           type: "negative",
           message: `Username dan password anda tidak cocok !!!`

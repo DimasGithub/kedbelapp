@@ -21,7 +21,12 @@
         </q-toolbar>
 
         <q-card class="my-card" style="margin:10px;">
-          <img :src="'http://127.0.0.1:8000/storage/' + dataproduk.gambar" />
+          <img
+            v-if="dataproduk.gambar"
+            :src="
+              'https://kedbel.com/dev.kedbel.com/storage/' + dataproduk.gambar
+            "
+          />
 
           <q-card-section>
             <div class="text-h6 text-weight-bolder text-primary">
@@ -106,7 +111,9 @@ export default {
     },
     hapus(id) {
       axios
-        .delete("http://127.0.0.1:8000/api/produk/delete/" + this.id)
+        .delete(
+          "https://kedbel.com/dev.kedbel.com/api/produk/delete/" + this.id
+        )
         .then(response => {
           this.$router.push("/indexadmin");
         });
@@ -125,7 +132,7 @@ export default {
       });
       axios
         .put(
-          "http://127.0.0.1:8000/api/produk/update/" + this.id,
+          "https://kedbel.com/dev.kedbel.com/api/produk/update/" + this.id,
           this.dataproduk,
           {
             headers: {
@@ -153,12 +160,14 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://127.0.0.1:8000/api/produk/ " + this.id).then(response => {
-      this.dataproduk = response.data;
-      console.log(response);
-    });
     axios
-      .get("http://127.0.0.1:8000/api/setting")
+      .get("https://kedbel.com/dev.kedbel.com/api/produk/ " + this.id)
+      .then(response => {
+        this.dataproduk = response.data;
+        console.log(response);
+      });
+    axios
+      .get("https://kedbel.com/dev.kedbel.com/api/setting")
       .then(response => (this.infoadmin = response));
   }
 };
