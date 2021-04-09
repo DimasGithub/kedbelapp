@@ -24,18 +24,16 @@
           :columns="columns"
           row-key="name"
         >
-          <template v-slot:body-cell-action="id">
-            <q-td :props="id">
-              <q-btn
-                color="primary"
-                icon-right="edit"
-                no-caps
-                flat
-                dense
-                @click="$router.push('/indexadmin/produk/' + dataproduk)"
-              />
-            </q-td>
-          </template>
+          <q-td>
+            <q-btn
+              color="primary"
+              icon-right="edit"
+              no-caps
+              flat
+              dense
+              @click="$router.push('/indexadmin/produk/' + dataproduk)"
+            />
+          </q-td>
         </q-table>
       </div>
     </q-page>
@@ -69,7 +67,7 @@ export default {
   },
   mounted() {
     axios
-      .get("https://kedbel.com/dev.kedbel.com/api/produk")
+      .get("http://127.0.0.1:8000/api/produk")
       .then(response => (this.dataproduk = response.data));
   },
   methods: {

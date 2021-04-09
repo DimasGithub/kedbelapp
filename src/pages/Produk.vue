@@ -43,9 +43,7 @@
                 @click="$router.push('/produk/' + info.id)"
               >
                 <img
-                  :src="
-                    'https://kedbel.com/dev.kedbel.com/storage/' + info.gambar
-                  "
+                  :src="'http://127.0.0.1:8000/storage/' + info.gambar"
                   style="height:160px;"
                 />
                 <q-card-section>
@@ -104,10 +102,10 @@ export default {
   },
   mounted() {
     axios
-      .get("https://kedbel.com/dev.kedbel.com/api/produk")
+      .get("http://127.0.0.1:8000/api/produk")
       .then(response => (this.info = response));
     axios
-      .get("https://kedbel.com/dev.kedbel.com/api/setting")
+      .get("http://127.0.0.1:8000/api/setting")
       .then(response => (this.infoadmin = response));
   }
 };

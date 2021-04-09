@@ -19,7 +19,7 @@
             Edit produk
           </q-toolbar-title>
         </q-toolbar>
-        <form>
+        <form enctype="multipart/form-data">
           <div class="row justify-center">
             <p style=" width:90%; margin-top:10px;">Nama barang :</p>
             <q-input
@@ -50,6 +50,7 @@
             />
             <p style=" width:90%;">Deskripsi :</p>
             <q-editor
+              v-if="dataproduk.deskripsi"
               name="deskripsi"
               style="width:90%; margin-right:10px; margin-left:10px; margin-bottom: 20px; justify-content: center;"
               v-model="dataproduk.deskripsi"
@@ -59,9 +60,8 @@
             />
             <p style=" width:90%;">Gambar sekarang :</p>
             <img
-              :src="
-                'https://kedbel.com/dev.kedbel.com/storage/' + dataproduk.gambar
-              "
+              v-if="dataproduk.gambar"
+              :src="'http://127.0.0.1:8000/storage/' + dataproduk.gambar"
               style="width:150px; height:150px;"
             />
             <p style=" width:90%;">Ubah Gambar :</p>
@@ -70,7 +70,7 @@
               @change="handleFileObject()"
               dense
               outlined
-              v-model="gambar"
+              v-model="image"
               label="Gambar produk"
               style="width:90%; margin-right:10px; margin-left:10px; margin-bottom: 20px; "
             />
@@ -98,39 +98,48 @@ export default {
       dialogUpdate: false,
       confirm: false,
       position: "top",
-      dataproduk: {},
-      gambar: null
+      dataproduk: {
+        namaproduk: "",
+        harga: null,
+        deskripsi: "",
+        gambar: ""
+      },
+      image: null
     };
+  },
+  mounted() {
+    axios.get("http://127.0.0.1:8000/api/produk/ " + this.id).then(response => {
+      this.dataproduk = response.data;
+    });
   },
   methods: {
     handleFileObject() {
-      this.gambar = this.$refs.file.files[0];
-      this.gambarName = this.gambar.name;
-      console.log(this.dataproduk.gambar);
+      this.image = this.$refs.file.files[0];
     },
-    ubah(id) {
-      let dataproduk = new FormData();
-      dataproduk.append("gambar", this.gambar);
+    ubah() {
+      var dataproduk = new FormData();
+      dataproduk.append("namaproduk", this.dataproduk.namaproduk);
+      dataproduk.append("harga", this.dataproduk.harga);
+      dataproduk.append("deskripsi", this.dataproduk.deskripsi);
+      dataproduk.append("gambar", this.image);
       _.each(this.dataproduk, (value, key) => {
         dataproduk.append(key, value);
       });
       axios
         .put(
-          "https://kedbel.com/dev.kedbel.com/api/produk/update/" + this.id,
-          this.dataproduk,
-          {
-            headers: {
-              "Content-Type":
-                "multipart/form-data; charset=utf-8; boundary=" +
-                Math.random()
-                  .toString()
-                  .substr(2)
-            }
-          }
+          "http://127.0.0.1:8000/api/produk/update/" + this.id,
+          this.dataproduk
+          // {
+          //   headers: {
+          //     "Content-Type":
+          //       "multipart/form-data; charset=utf-8; boundary=" +
+          //       Math.random()
+          //         .toString()
+          //         .substr(2)
+          //   }
+          // }
         )
-        .then(response => {
-          this.$router.push("/indexadmin");
-        })
+        .then(response => this.$router.push("/indexadmin"))
         .catch(err => {
           if (err.response.status === 422) {
             this.errors = [];
@@ -142,14 +151,6 @@ export default {
           }
         });
     }
-  },
-  mounted() {
-    axios
-      .get("https://kedbel.com/dev.kedbel.com/api/produk/ " + this.id)
-      .then(response => {
-        this.dataproduk = response.data;
-        console.log(this.dataproduk);
-      });
   }
 };
 </script>

@@ -95,7 +95,7 @@ export default {
     ubah() {
       axios
         .put(
-          "https://kedbel.com/dev.kedbel.com/api/biodata/edit/" + this.id,
+          "http://127.0.0.1:8000/api/biodata/edit/" + this.id,
           this.dataproduk
         )
         .then(response => {
@@ -115,7 +115,7 @@ export default {
   },
   mounted() {
     axios
-      .get("https://kedbel.com/dev.kedbel.com/api/biodata/ " + this.id)
+      .get("http://127.0.0.1:8000/api/biodata/ " + this.id)
       .then(response => {
         this.dataproduk = response.data;
         console.log(this.dataproduk);

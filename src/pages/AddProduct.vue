@@ -114,19 +114,15 @@ export default {
         dataproduk.append(key, value);
       });
       axios
-        .post(
-          "https://kedbel.com/dev.kedbel.com/api/produk/create/",
-          dataproduk,
-          {
-            headers: {
-              "Content-Type":
-                "multipart/form-data; charset=utf-8; boundary=" +
-                Math.random()
-                  .toString()
-                  .substr(2)
-            }
+        .post("http://127.0.0.1:8000/api/produk/create/", dataproduk, {
+          headers: {
+            "Content-Type":
+              "multipart/form-data; charset=utf-8; boundary=" +
+              Math.random()
+                .toString()
+                .substr(2)
           }
-        )
+        })
         .then(this.$router.push("/indexadmin"))
         .catch(err => {
           if (err.response.status === 422) {
@@ -151,6 +147,7 @@ export default {
     handleFileObject() {
       this.gambar = this.$refs.file.files[0];
       this.gambarName = this.gambar.name;
+      console.log(this.gambarName);
     }
   }
 };
