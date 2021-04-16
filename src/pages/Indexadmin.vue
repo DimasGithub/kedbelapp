@@ -1,7 +1,7 @@
 <template>
   <q-page-container>
     <q-page>
-      <q-toolbar elevated class="navigasi text-primary">
+      <q-toolbar elevated class="text-primary">
         <q-toolbar-title style="left:0;">
           Admin panel
         </q-toolbar-title>
@@ -24,33 +24,54 @@
           style="margin: 10px;"
           size="12px"
         />
-        <!-- <q-table
-          title="Data produk"
-          :data="dataproduk"
-          :columns="columns"
-          row-key="name"
-        >
-          <q-td>
-            <q-btn
-              color="primary"
-              icon-right="edit"
-              no-caps
-              flat
-              dense
-              @click="$router.push('/indexadmin/produk/' + dataproduk)"
-            />
-          </q-td>
-        </q-table> -->
+        <div class="q-pa-md">
+          <q-table
+            title="Data produk"
+            :data="dataproduk"
+            :columns="columns"
+            row-key="name"
+            :filter="filter"
+            hide-header
+          >
+            <template v-slot:top-right>
+              <q-input
+                borderless
+                dense
+                debounce="50"
+                v-model="filter"
+                placeholder="Cari produk"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </template>
+            <template v-slot:body-cell-actions="id">
+              <q-td :props="id">
+                <q-btn
+                  dense
+                  round
+                  flat
+                  color="grey"
+                  @click="detail(id.value)"
+                  icon="edit"
+                ></q-btn>
+              </q-td>
+            </template>
+          </q-table>
+        </div>
       </div>
     </q-page>
   </q-page-container>
 </template>
 <script>
 import axios from "axios";
+import router from "src/router";
 export default {
   props: ["id"],
   data() {
     return {
+      filter: "",
       lorem:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       columns: [
@@ -68,7 +89,7 @@ export default {
           field: "harga",
           sortable: true
         },
-        { name: "action", label: "Aksi", field: "dataproduk.id" }
+        { name: "actions", label: "Aksi", field: "id", align: "center" }
       ],
       dataproduk: []
     };
@@ -79,6 +100,9 @@ export default {
       .then(response => (this.dataproduk = response.data));
   },
   methods: {
+    detail(id) {
+      this.$router.push("/indexadmin/produk/" + id);
+    },
     pindah(index) {
       console.log(index);
       $router.push("/indexadmin/produk/" + id);
@@ -112,11 +136,5 @@ export default {
 <style>
 .my-card {
   width: 90%;
-}
-.navigasi {
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  width: 100%;
 }
 </style>

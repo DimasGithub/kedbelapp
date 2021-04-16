@@ -131,7 +131,9 @@ export default {
             }
           }
         )
-        .then(this.$router.push("/indexadmin"))
+        .then(response => {
+          this.$router.push("/indexadmin");
+        })
         .catch(err => {
           if (err.response.status === 422) {
             this.errors = [];

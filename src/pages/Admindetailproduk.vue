@@ -13,7 +13,7 @@
             round
             dense
             icon="arrow_back"
-            @click="$router.push('/produk')"
+            @click="$router.push('/indexadmin')"
           />
           <q-toolbar-title>
             Detail produk
@@ -38,7 +38,7 @@
 
           <div class="row justify-center">
             <q-btn
-              @click="open('bottom')"
+              @click="edit()"
               unelevated
               rounded
               color="primary"
@@ -98,10 +98,14 @@ export default {
     };
   },
   methods: {
+    edit() {
+      this.$router.push("/indexadmin/edit/" + this.dataproduk.id);
+    },
     formatPrice(value) {
       let val = (value / 1).toFixed(2).replace(".", ",");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
+
     open(position) {
       this.position = position;
       this.dialogUpdate = true;
@@ -109,7 +113,7 @@ export default {
     redirect(url) {
       window.location = url;
     },
-    hapus(id) {
+    hapus() {
       axios
         .delete(
           "https://kedbel.com/dev.kedbel.com/api/produk/delete/" + this.id
@@ -124,7 +128,8 @@ export default {
       this.gambarName = this.gambar.name;
       console.log(this.gambarName);
     },
-    ubah(id) {
+
+    ubah() {
       let dataproduk = new FormData();
       dataproduk.append("gambar", this.gambar);
       _.each(this.dataproduk, (value, key) => {

@@ -13,7 +13,7 @@
             round
             dense
             icon="arrow_back"
-            @click="$router.push('/produk')"
+            @click="$router.push('/indexadmin')"
           />
           <q-toolbar-title>
             Edit produk
