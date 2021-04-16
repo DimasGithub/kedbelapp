@@ -54,6 +54,10 @@
                 name="deskripsi"
                 style="width:90%; margin-right:10px; margin-left:10px; margin-bottom: 20px; justify-content: center;"
                 v-model="dataproduk.deskripsi"
+                lazy-rules
+                :rules="[
+                  val => (val && val.length > 0) || 'Please type something'
+                ]"
                 :definitions="{
                   bold: { label: 'Bold', icon: null, tip: 'My bold tooltip' }
                 }"
@@ -114,15 +118,19 @@ export default {
         dataproduk.append(key, value);
       });
       axios
-        .post("http://127.0.0.1:8000/api/produk/create/", dataproduk, {
-          headers: {
-            "Content-Type":
-              "multipart/form-data; charset=utf-8; boundary=" +
-              Math.random()
-                .toString()
-                .substr(2)
+        .post(
+          "https://kedbel.com/dev.kedbel.com/api/produk/create",
+          dataproduk,
+          {
+            headers: {
+              "Content-Type":
+                "multipart/form-data; charset=utf-8; boundary=" +
+                Math.random()
+                  .toString()
+                  .substr(2)
+            }
           }
-        })
+        )
         .then(this.$router.push("/indexadmin"))
         .catch(err => {
           if (err.response.status === 422) {

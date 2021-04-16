@@ -38,13 +38,14 @@
           <div class="col-6" v-for="info in info.data" v-bind:key="info.id">
             <div style="margin:5px;">
               <q-card
-                style="height:250px;"
+                style="height:auto;"
                 class="my-card"
                 @click="$router.push('/produk/' + info.id)"
               >
                 <img
-                  :src="'http://127.0.0.1:8000/storage/' + info.gambar"
-                  style="height:160px;"
+                  :src="
+                    'https://kedbel.com/dev.kedbel.com/storage/' + info.gambar
+                  "
                 />
                 <q-card-section>
                   <div class="text-h7">{{ info.namaproduk }}</div>
@@ -102,10 +103,11 @@ export default {
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:8000/api/produk")
+
+      .get("https://kedbel.com/dev.kedbel.com/api/produk")
       .then(response => (this.info = response));
     axios
-      .get("http://127.0.0.1:8000/api/setting")
+      .get("https://kedbel.com/dev.kedbel.com/api/setting")
       .then(response => (this.infoadmin = response));
   }
 };

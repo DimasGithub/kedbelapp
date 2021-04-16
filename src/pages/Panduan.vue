@@ -14,7 +14,7 @@
               round
               dense
               icon="arrow_back"
-              @click="$router.push('/')"
+              @click="$router.push('/produk')"
             ></q-btn>
             Panduan
           </q-toolbar-title>

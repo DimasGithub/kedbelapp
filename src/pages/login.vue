@@ -73,6 +73,9 @@ export default {
         this.$router.push("/indexadmin");
       }
     }
+  },
+  mounted() {
+    a;
   }
 };
 </script>

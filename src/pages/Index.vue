@@ -7,10 +7,16 @@
       :duration="700"
     >
       <q-page class="flex flex-center">
-        <q-img
-          style="width:70%; position: absolute; top: 100px;"
-          src="~assets/logo.png"
-        />
+        <div v-for="infoadmin in infoadmin.data" v-bind:key="infoadmin.id">
+          <div v-if="infoadmin.key === 'site.logo'">
+            <q-img
+              style="width:280px; bottom: 220px; margin-left: auto; margin-right: auto;"
+              :src="
+                'https://kedbel.com/dev.kedbel.com/storage/' + infoadmin.value
+              "
+            />
+          </div>
+        </div>
         <q-btn
           @click="$router.push('/produk')"
           unelevated
@@ -174,7 +180,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:8000/api/setting")
+      .get("https://kedbel.com/dev.kedbel.com/api/setting")
       .then(response => (this.infoadmin = response));
   }
 };

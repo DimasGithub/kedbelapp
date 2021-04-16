@@ -24,7 +24,7 @@
             method="post"
             enctype="multipart/form-data"
             class="q-gutter-md"
-            action="http://127.0.0.1:8000/api/biodata/add"
+            action="https://kedbel.com/dev.kedbel.com/api/biodata/add"
           >
             <div class="row justify-center">
               <p style=" width:90%; margin-top:10px;">Nama :</p>
@@ -116,7 +116,7 @@ export default {
         dataproduk.append(key, value);
       });
       axios
-        .post("http://127.0.0.1:8000/api/biodata/add", dataproduk, {
+        .post("https://kedbel.com/dev.kedbel.com/api/biodata/add", dataproduk, {
           headers: {
             "Content-Type":
               "multipart/form-data; charset=utf-8; boundary=" +

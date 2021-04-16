@@ -23,7 +23,7 @@
         <q-card class="my-card" style="margin:10px;">
           <img
             v-if="info.gambar"
-            :src="'http://127.0.0.1:8000/storage/' + info.gambar"
+            :src="'https://kedbel.com/dev.kedbel.com/storage/' + info.gambar"
           />
 
           <q-card-section>
@@ -178,12 +178,14 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://127.0.0.1:8000/api/produk/ " + this.id).then(response => {
-      this.info = response.data;
-      console.log(response);
-    });
     axios
-      .get("http://127.0.0.1:8000/api/setting")
+      .get("https://kedbel.com/dev.kedbel.com/api/produk/ " + this.id)
+      .then(response => {
+        this.info = response.data;
+        console.log(response);
+      });
+    axios
+      .get("https://kedbel.com/dev.kedbel.com/api/setting")
       .then(response => (this.infoadmin = response));
   }
 };

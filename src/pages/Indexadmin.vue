@@ -1,13 +1,20 @@
 <template>
   <q-page-container>
     <q-page>
-      <q-toolbar elevated class="text-primary">
-        <q-btn flat round dense icon="arrow_back" @click="$router.push('/')" />
-        <q-toolbar-title>
+      <q-toolbar elevated class="navigasi text-primary">
+        <q-toolbar-title style="left:0;">
           Admin panel
         </q-toolbar-title>
+        <q-btn-dropdown color="primary" flat round dense>
+          <q-list>
+            <q-item clickable v-close-popup @click="confirm">
+              <q-item-section>
+                <q-item-label>Logout</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
       </q-toolbar>
-
       <div>
         <q-btn
           dense
@@ -17,8 +24,7 @@
           style="margin: 10px;"
           size="12px"
         />
-
-        <q-table
+        <!-- <q-table
           title="Data produk"
           :data="dataproduk"
           :columns="columns"
@@ -34,7 +40,7 @@
               @click="$router.push('/indexadmin/produk/' + dataproduk)"
             />
           </q-td>
-        </q-table>
+        </q-table> -->
       </div>
     </q-page>
   </q-page-container>
@@ -45,9 +51,11 @@ export default {
   props: ["id"],
   data() {
     return {
+      lorem:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       columns: [
         {
-          name: "name",
+          name: "namaproduk",
           label: "Nama produk",
           field: "namaproduk",
           align: "left",
@@ -67,7 +75,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:8000/api/produk")
+      .get("https://kedbel.com/dev.kedbel.com/api/produk")
       .then(response => (this.dataproduk = response.data));
   },
   methods: {
@@ -75,7 +83,40 @@ export default {
       console.log(index);
       $router.push("/indexadmin/produk/" + id);
       console.log(this.$router);
+    },
+    confirm() {
+      this.$q
+        .dialog({
+          title: "Logout",
+          message: "apakah anda yakin ingin keluar?",
+          cancel: true,
+          persistent: true
+        })
+        .onOk(() => {
+          this.$router.push("/produk");
+          // console.log('>>>> OK')
+        })
+        .onOk(() => {
+          // console.log('>>>> second OK catcher')
+        })
+        .onCancel(() => {
+          // console.log('>>>> Cancel')
+        })
+        .onDismiss(() => {
+          // console.log('I am triggered on both OK and Cancel')
+        });
     }
   }
 };
 </script>
+<style>
+.my-card {
+  width: 90%;
+}
+.navigasi {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+</style>
