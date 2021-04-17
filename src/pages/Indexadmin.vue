@@ -27,6 +27,7 @@
         <div class="q-pa-md">
           <q-table
             title="Data produk"
+            dense
             :data="dataproduk"
             :columns="columns"
             row-key="name"
@@ -34,11 +35,12 @@
           >
             <template v-slot:top-right>
               <q-input
+                style="width: 100px;"
                 borderless
                 dense
-                debounce="50"
+                debounce="300"
                 v-model="filter"
-                placeholder="Cari produk"
+                placeholder="Cari"
               >
                 <template v-slot:append>
                   <q-icon name="search" />
@@ -132,8 +134,3 @@ export default {
   }
 };
 </script>
-<style>
-.my-card {
-  width: 90%;
-}
-</style>

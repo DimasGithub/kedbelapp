@@ -34,9 +34,9 @@
             </q-list>
           </q-btn-dropdown>
         </q-toolbar>
-        <div class="row " style="margin:10px;">
+        <div class="row" style="margin-top:10px; margin-button:10px;">
           <div class="col-6" v-for="info in info.data" v-bind:key="info.id">
-            <div style="margin: 5px;">
+            <div style="margin:5px;">
               <q-card
                 class="my-card"
                 @click="$router.push('/produk/' + info.id)"

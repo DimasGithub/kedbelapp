@@ -1,7 +1,7 @@
 {
-  "name": "id.co.studioweb.kedbelapp.app2",
+  "name": "id.co.studioweb.kedbelapp.app3",
   "displayName": "kedbelapp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Ini aplikasi pemesanan sablon kedbel.com ",
   "main": "index.js",
   "scripts": {
