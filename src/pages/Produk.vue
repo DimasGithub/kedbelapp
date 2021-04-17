@@ -34,7 +34,56 @@
             </q-list>
           </q-btn-dropdown>
         </q-toolbar>
-        <div class="row" style="margin-top:10px; margin-button:10px;">
+        <div class="q-pa-md">
+          <q-table
+            grid
+            :data="dataproduk"
+            :columns="columns"
+            row-key="name"
+            :filter="filter"
+            hide-header
+          >
+            <template v-slot:top>
+              <q-input
+                border
+                rounded
+                style="width:100%;"
+                dense
+                v-model="filter"
+                placeholder="Cari produk"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </template>
+            <template v-slot:item="props">
+              <div class="q-pa-xs col-xs-12 col-sm-12 col-md-4">
+                <q-card @click="lihatdetail(props.row.id)">
+                  <q-card-section class="text-center">
+                    <img
+                      :src="
+                        'https://kedbel.com/dev.kedbel.com/storage/' +
+                          props.row.gambar
+                      "
+                      style="width:50%;"
+                    />
+                  </q-card-section>
+                  <q-separator />
+                  <div class="text-center">
+                    <div style="font-size:18px;">
+                      {{ props.row.namaproduk }}
+                    </div>
+                    <div class="text-h6 text-weight-bolder text-primary">
+                      Rp.{{ formatPrice(props.row.harga) }}
+                    </div>
+                  </div>
+                </q-card>
+              </div>
+            </template>
+          </q-table>
+        </div>
+        <!-- <div class="row" style="margin-top:10px; margin-button:10px;">
           <div class="col-6" v-for="info in info.data" v-bind:key="info.id">
             <div style="margin:5px;">
               <q-card
@@ -55,8 +104,8 @@
               </q-card>
             </div>
           </div>
-        </div>
-        <div v-for="infoadmin in infoadmin.data" v-bind:key="infoadmin.id">
+        </div> -->
+        <!-- <div v-for="infoadmin in infoadmin.data" v-bind:key="infoadmin.id">
           <div v-if="infoadmin.key === 'site.nomorwa'">
             <q-page-sticky position="bottom-right" :offset="[18, 18]">
               <q-btn
@@ -73,7 +122,7 @@
               />
             </q-page-sticky>
           </div>
-        </div>
+        </div> -->
       </q-page>
     </transition>
   </q-page-container>
@@ -85,13 +134,32 @@ export default {
   props: ["id"],
   data() {
     return {
+      filter: "",
       infoadmin: {},
-      info: {},
-      lorem:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      columns: [
+        {
+          name: "namaproduk",
+          label: "Nama produk",
+          field: "namaproduk",
+          align: "left",
+          sortable: true
+        },
+        {
+          name: "Harga",
+          align: "left",
+          label: "Harga",
+          field: "harga",
+          sortable: true
+        },
+        { name: "actions", label: "Aksi", field: "id", align: "center" }
+      ],
+      dataproduk: []
     };
   },
   methods: {
+    lihatdetail(id) {
+      this.$router.push("/produk/" + id);
+    },
     redirect(url) {
       window.location = url;
     },
@@ -103,7 +171,7 @@ export default {
   mounted() {
     axios
       .get("https://kedbel.com/dev.kedbel.com/api/produk")
-      .then(response => (this.info = response));
+      .then(response => (this.dataproduk = response.data));
     axios
       .get("https://kedbel.com/dev.kedbel.com/api/setting")
       .then(response => (this.infoadmin = response));

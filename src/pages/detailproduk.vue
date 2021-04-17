@@ -27,7 +27,7 @@
           />
 
           <q-card-section>
-            <div class="text-h6 text-weight-bolder text-primary">
+            <div class="text-h5 text-weight-bolder text-primary">
               Rp. {{ formatPrice(info.harga) }}
             </div>
             <div class="text-h6">{{ info.namaproduk }}</div>
