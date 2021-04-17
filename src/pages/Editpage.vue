@@ -93,7 +93,7 @@
 
 <script>
 import axios from "axios";
-import router from "src/router";
+import _ from "lodash";
 export default {
   props: ["id"],
   data() {
@@ -117,10 +117,16 @@ export default {
         this.dataproduk = response.data;
       });
   },
+
   methods: {
-    onfilechange(event) {
-      let file = event.target.files[0];
-      this.image = file;
+    triggerPositive() {
+      this.$q.notify({
+        type: "positive",
+        message: `Data berhasil diubah.`
+      });
+    },
+    onfilechange() {
+      this.image = this.$refs.file.files[0];
       console.log(this.image);
     },
 
@@ -133,20 +139,24 @@ export default {
       _.each(this.dataproduk, (value, key) => {
         dataproduk.append(key, value);
       });
-      const produk = {
-        namaproduk: this.dataproduk.namaproduk,
-        harga: this.dataproduk.harga,
-        deskripsi: this.dataproduk.deskripsi,
-        gambar: this.dataproduk.gambar
-      };
       axios
         .put(
           "https://kedbel.com/dev.kedbel.com/api/produk/update/" + this.id,
-          this.dataproduk
+          dataproduk
         )
-        .then(this.$router.push("/indexadmin"))
+        .then(response => {
+          this.$router.push("/indexadmin");
+          this.$q.notify({
+            type: "positive",
+            message: `Data berhasil diubah.`
+          });
+        })
         .catch(err => {
           if (err.response.status === 422) {
+            this.$q.notify({
+              type: "negative",
+              message: `Data gagal diubah.`
+            });
             this.errors = [];
             _.each(err.response.data.errors, error => {
               _.each(error, e => {

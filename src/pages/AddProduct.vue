@@ -133,6 +133,10 @@ export default {
         )
         .then(response => {
           this.$router.push("/indexadmin");
+          this.$q.notify({
+            type: "positive",
+            message: `Data berhasil ditambah.`
+          });
         })
         .catch(err => {
           if (err.response.status === 422) {

@@ -31,7 +31,6 @@
             :columns="columns"
             row-key="name"
             :filter="filter"
-            hide-header
           >
             <template v-slot:top-right>
               <q-input
