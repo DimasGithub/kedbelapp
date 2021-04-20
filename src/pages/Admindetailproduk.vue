@@ -7,19 +7,23 @@
       :duration="700"
     >
       <q-page>
-        <q-toolbar elevated class="text-primary">
-          <q-btn
-            flat
-            round
-            dense
-            icon="arrow_back"
-            @click="$router.push('/indexadmin')"
-          />
-          <q-toolbar-title>
-            Detail produk
-          </q-toolbar-title>
-        </q-toolbar>
-
+        <q-header reveal class="fixed-top">
+          <q-toolbar
+            class="text-primary"
+            style="background-color:white; position: fixed; top: 0px; width: 100%;"
+          >
+            <q-btn
+              flat
+              round
+              dense
+              icon="arrow_back"
+              @click="$router.push('/indexadmin')"
+            />
+            <q-toolbar-title>
+              Detail produk
+            </q-toolbar-title>
+          </q-toolbar>
+        </q-header>
         <q-card class="my-card" style="margin:10px;">
           <img
             v-if="dataproduk.gambar"

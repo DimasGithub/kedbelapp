@@ -35,7 +35,7 @@
           >
             <template v-slot:top-right>
               <q-input
-                style="width: 150px;"              
+                style="width: 150px;"
                 dense
                 debounce="300"
                 v-model="filter"

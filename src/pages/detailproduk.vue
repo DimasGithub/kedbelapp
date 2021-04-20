@@ -7,7 +7,8 @@
       :duration="700"
     >
       <q-page>
-        <q-toolbar elevated class="text-primary">
+        <q-header elevated reveal class="fixed-top">
+        <q-toolbar elevated class="text-primary"  style="background-color:white; position: fixed; top: 0px; width: 100%;">
           <q-btn
             flat
             round
@@ -19,6 +20,7 @@
             Detail produk
           </q-toolbar-title>
         </q-toolbar>
+        </q-header>
 
         <q-card class="my-card" style="margin:10px;">
           <img

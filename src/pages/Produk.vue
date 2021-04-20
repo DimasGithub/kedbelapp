@@ -7,34 +7,56 @@
       :duration="700"
     >
       <q-page>
-        <q-toolbar elevated class="text-primary">
-          <q-btn
-            flat
-            round
+        <q-header reveal class="fixed-top" style="background-color:white; ">
+          <q-toolbar
+            class="text-primary"
+            style="background-color:white; position: fixed; top: 0px; width: 100%;"
+          >
+            <q-btn
+              flat
+              round
+              dense
+              icon="arrow_back"
+              @click="$router.push('/')"
+            />
+            <q-toolbar-title>
+              Produk
+            </q-toolbar-title>
+            <q-btn-dropdown color="primary" flat round dense>
+              <q-list>
+                <q-item
+                  clickable
+                  v-close-popup
+                  @click="$router.push('/panduan')"
+                >
+                  <q-item-section>
+                    <q-item-label>Panduan</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="$router.push('/login')">
+                  <q-item-section>
+                    <q-item-label>Login</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
+          </q-toolbar>
+          <q-input
+            outlined
             dense
-            icon="arrow_back"
-            @click="$router.push('/')"
-          />
-          <q-toolbar-title>
-            Produk
-          </q-toolbar-title>
-          <q-btn-dropdown color="primary" flat round dense>
-            <q-list>
-              <q-item clickable v-close-popup @click="$router.push('/panduan')">
-                <q-item-section>
-                  <q-item-label>Panduan</q-item-label>
-                </q-item-section>
-              </q-item>
+            border
+            rounded
+            style="background-color:white; position: fixed; top: 35px; width: 100%; padding: 15px;"
+            v-model="filter"
+            placeholder="Cari produk"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </q-header>
 
-              <q-item clickable v-close-popup @click="$router.push('/login')">
-                <q-item-section>
-                  <q-item-label>Login</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-btn-dropdown>
-        </q-toolbar>
-        <div class="q-pa-md">
+        <div class="q-pa-md" style="margin-top:60px;">
           <q-table
             grid
             :data="dataproduk"
@@ -43,21 +65,6 @@
             :filter="filter"
             hide-header
           >
-            <template v-slot:top>
-              <q-input
-                outlined 
-                border
-                rounded
-                style="width:100%;"
-                dense
-                v-model="filter"
-                placeholder="Cari produk"
-              >
-                <template v-slot:append>
-                  <q-icon name="search" />
-                </template>
-              </q-input>
-            </template>
             <template v-slot:item="props">
               <div class="q-pa-xs col-xs-6 col-sm-6 col-md-5">
                 <q-card @click="lihatdetail(props.row.id)">
@@ -75,7 +82,10 @@
                     <div style="font-size:16px;">
                       {{ props.row.namaproduk }}
                     </div>
-                    <div class="text-weight-bolder text-primary" style="font-size:19px;">
+                    <div
+                      class="text-weight-bolder text-primary"
+                      style="font-size:19px;"
+                    >
                       Rp.{{ formatPrice(props.row.harga) }}
                     </div>
                   </div>
