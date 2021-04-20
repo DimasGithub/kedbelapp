@@ -45,6 +45,7 @@
           >
             <template v-slot:top>
               <q-input
+                outlined 
                 border
                 rounded
                 style="width:100%;"
@@ -58,7 +59,7 @@
               </q-input>
             </template>
             <template v-slot:item="props">
-              <div class="q-pa-xs col-xs-12 col-sm-12 col-md-4">
+              <div class="q-pa-xs col-xs-6 col-sm-6 col-md-5">
                 <q-card @click="lihatdetail(props.row.id)">
                   <q-card-section class="text-center">
                     <img
@@ -66,15 +67,15 @@
                         'https://kedbel.com/dev.kedbel.com/storage/' +
                           props.row.gambar
                       "
-                      style="width:50%;"
+                      style="width:100%;"
                     />
                   </q-card-section>
                   <q-separator />
                   <div class="text-center">
-                    <div style="font-size:18px;">
+                    <div style="font-size:16px;">
                       {{ props.row.namaproduk }}
                     </div>
-                    <div class="text-h6 text-weight-bolder text-primary">
+                    <div class="text-weight-bolder text-primary" style="font-size:19px;">
                       Rp.{{ formatPrice(props.row.harga) }}
                     </div>
                   </div>
@@ -83,46 +84,6 @@
             </template>
           </q-table>
         </div>
-        <!-- <div class="row" style="margin-top:10px; margin-button:10px;">
-          <div class="col-6" v-for="info in info.data" v-bind:key="info.id">
-            <div style="margin:5px;">
-              <q-card
-                class="my-card"
-                @click="$router.push('/produk/' + info.id)"
-              >
-                <img
-                  :src="
-                    'https://kedbel.com/dev.kedbel.com/storage/' + info.gambar
-                  "
-                />
-                <q-card-section>
-                  <div class="text-h7">{{ info.namaproduk }}</div>
-                  <div class="text-h7 text-weight-bolder text-primary">
-                    Rp.{{ formatPrice(info.harga) }}
-                  </div>
-                </q-card-section>
-              </q-card>
-            </div>
-          </div>
-        </div> -->
-        <!-- <div v-for="infoadmin in infoadmin.data" v-bind:key="infoadmin.id">
-          <div v-if="infoadmin.key === 'site.nomorwa'">
-            <q-page-sticky position="bottom-right" :offset="[18, 18]">
-              <q-btn
-                fab
-                icon="phone"
-                color="primary"
-                @click="
-                  redirect(
-                    'https://wa.me/62' +
-                      infoadmin.value +
-                      '?text=Hi%2C%20Saya%20ingin%20konsultasi'
-                  )
-                "
-              />
-            </q-page-sticky>
-          </div>
-        </div> -->
       </q-page>
     </transition>
   </q-page-container>

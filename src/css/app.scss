@@ -1,1 +1,10 @@
 // app global css in SCSS form
+@font-face {
+    font-family: montserrat;
+    src: url(./font/Montserrat-Black.otf);
+  }
+  
+  // declare a class which applies it
+.my-font {
+    font-family: 'montserrat';
+}

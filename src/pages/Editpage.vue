@@ -142,7 +142,7 @@ export default {
       axios
         .put(
           "https://kedbel.com/dev.kedbel.com/api/produk/update/" + this.id,
-          dataproduk
+          this.dataproduk
         )
         .then(response => {
           this.$router.push("/indexadmin");
