@@ -24,3 +24,11 @@ quasar build
 
 ### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+
+
+### Download apps
+https://play.google.com/store/apps/details?id=com.studioweb.kedbelapp.app
+
+
+### Project image
+<img src = 'https://github.com/DimasGithub/sekolahku/blob/master/custom%20%E2%80%93%202.png' />
