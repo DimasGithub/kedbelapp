@@ -56,7 +56,7 @@
           </q-input>
         </q-header>
 
-        <div class="q-pa-md" style="margin-top:60px;">
+        <div class="q-pa-md" style="margin-top:70px;">
           <q-table
             grid
             :data="dataproduk"

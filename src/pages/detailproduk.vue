@@ -8,18 +8,22 @@
     >
       <q-page>
         <q-header elevated reveal class="fixed-top">
-        <q-toolbar elevated class="text-primary"  style="background-color:white; position: fixed; top: 0px; width: 100%;">
-          <q-btn
-            flat
-            round
-            dense
-            icon="arrow_back"
-            @click="$router.push('/produk')"
-          />
-          <q-toolbar-title>
-            Detail produk
-          </q-toolbar-title>
-        </q-toolbar>
+          <q-toolbar
+            elevated
+            class="text-primary"
+            style="background-color:white; position: fixed; top: 0px; width: 100%;"
+          >
+            <q-btn
+              flat
+              round
+              dense
+              icon="arrow_back"
+              @click="$router.push('/produk')"
+            />
+            <q-toolbar-title>
+              Detail produk
+            </q-toolbar-title>
+          </q-toolbar>
         </q-header>
 
         <q-card class="my-card" style="margin:10px;">

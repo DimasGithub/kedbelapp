@@ -1,6 +1,6 @@
 {
   "name": "kedbelapp",
-  "version": "0.0.2",
+  "version": "2.1.0",
   "description": "ini aplikasi pemesanan baju kedbel.com",
   "productName": "kedbelapp",
   "author": "Dimas Indra Setiawan <dim.dim10032000@gmail.com>",
@@ -15,6 +15,7 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "joi": "^17.4.0",
     "quasar": "^1.0.0",
     "vue": "^2.6.12",
     "vuetable": "^1.5.12",
