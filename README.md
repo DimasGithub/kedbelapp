@@ -31,4 +31,4 @@ https://play.google.com/store/apps/details?id=com.studioweb.kedbelapp.app
 
 
 ### Project image
-<img src = 'https://github.com/DimasGithub/sekolahku/blob/master/custom%20%E2%80%93%202.png' />
+<img src = 'https://github.com/DimasGithub/kedbelapp/blob/master/custom%20%E2%80%93%201.png' />
